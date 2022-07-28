@@ -6,7 +6,7 @@ class Vector3:
     """
           
     def __init__(self, x: float, y: float, z: float):
-        """Initialize class
+        """Initialize class.
 
         Args:
             x (float): X-coordinate of this vector.
