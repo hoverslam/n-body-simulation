@@ -5,7 +5,7 @@ class Vector3:
     """This class represents vectors in a 3D vector space. 
     """
           
-    def __init__(self, x: float, y: float, z: float):
+    def __init__(self, x: float, y: float, z: float) -> None:
         """Initialize class.
 
         Args:
@@ -58,11 +58,11 @@ class Vector3:
         """Returns the length (norm) of this vector.
 
         Returns:
-            float: The length of this vector.
+            float: Length of this vector.
         """
         return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
     
-    def normalize(self):
+    def normalize(self) -> None:
         """Changes the length of this vector to 1. The direction and orientation is not affected.
         """
         length = self.length()
