@@ -5,7 +5,7 @@ class Vector3:
     """This class represents vectors in a 3D vector space. 
     """
           
-    def __init__(self, x: float, y: float, z: float) -> None:
+    def __init__(self, x: float = 0.0, y: float = 0.0, z: float = 0.0) -> None:
         """Initialize class.
 
         Args:
