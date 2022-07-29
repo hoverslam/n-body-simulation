@@ -41,20 +41,7 @@ class Vector3:
         return Vector3(self.x - v.x,
                        self.y - v.y,
                        self.z - v.z)
-   
-    def __mul__(self, f: float) -> Vector3:
-        """Returns the product of this vector and f.
-
-        Args:
-            f (float): A number by which this vector is multiplied.
-
-        Returns:
-            Vector3: A vector in 3D space.
-        """
-        return Vector3(self.x * f,
-                       self.y * f,
-                       self.z * f)
-        
+      
     def __getitem__(self, item: int) -> float:
         """Returns the coordinate specified by an index.
 
@@ -83,6 +70,19 @@ class Vector3:
             str: Coordinates of this vector.
         """
         return "Vector({}, {}, {})".format(self.x, self.y, self.z)
+
+    def times(self, f: float) -> Vector3:
+        """Returns the product of this vector and f.
+
+        Args:
+            f (float): A number by which this vector is multiplied.
+
+        Returns:
+            Vector3: A vector in 3D space.
+        """
+        return Vector3(self.x * f,
+                       self.y * f,
+                       self.z * f)
 
     def length(self) -> float:
         """Returns the length (norm) of this vector.
