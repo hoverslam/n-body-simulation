@@ -54,6 +54,35 @@ class Vector3:
         return Vector3(self.x * f,
                        self.y * f,
                        self.z * f)
+        
+    def __getitem__(self, item: int) -> float:
+        """Returns the coordinate specified by an index.
+
+        Args:
+            item (int): The index of the coordinate (x = 0, y = 1, z = 2)
+
+        Raises:
+            IndexError: Maximum index is 2 since this vector has only 3 coordinates.  
+
+        Returns:
+            float: One coordinate of this vector.
+        """
+        if item == 0: 
+            return self.x
+        elif item == 1:
+            return self.y
+        elif item == 2:
+            return self.z
+        else:
+            raise IndexError("This vector has only 3 coordinates.")
+        
+    def __str__(self) -> str:
+        """Returns a readable form of the vector coordinates.
+
+        Returns:
+            str: Coordinates of this vector.
+        """
+        return "Vector({}, {}, {})".format(self.x, self.y, self.z)
 
     def length(self) -> float:
         """Returns the length (norm) of this vector.
