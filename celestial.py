@@ -11,10 +11,10 @@ class Body:
         """Initialize class.
 
         Args:
-            position (Vector3): The position from the origin in km.
-            velocity (Vector3): The velocity of this body in km.
-            mass (float): The mass of this body in kg.
-            radius (float): The radius of this body in km.
+            position (Vector3): The position from the origin.
+            velocity (Vector3): The velocity of this body.
+            mass (float): The mass of this body in kilograms.
+            radius (float): The radius of this body in meters.
             name (str, optional): The name of this body. Defaults to "".
             color (str, optional): The color in which the body is displayed on the canvas. Defaults to "lightgray".
         """
@@ -26,7 +26,7 @@ class Body:
         self.color = color
         self.force = Vector3()
         
-    def update(self) -> None:
+    def move(self) -> None:
         raise NotImplementedError
     
     def distance_to(self, b: Body) -> float:
