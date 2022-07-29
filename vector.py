@@ -1,6 +1,7 @@
 import math
 from __future__ import annotations
 
+
 class Vector3:
     """This class represents vectors in a 3D vector space. 
     """
