@@ -47,7 +47,7 @@ class Simulation:
         self.set_limits()
         self.remove_ticks()
         for b in self.bodies:
-            marker_size = b.radius / 6.957e8 * 1e2    # make the marker a seeable size
+            marker_size = b.radius / 6.957e8 * 1e2 / self.size    # make the marker a seeable size
             self.ax.scatter(b.position[0], b.position[1], b.position[2], s=marker_size, c=b.color)
         plt.pause(0.0001)
         self.ax.clear()
