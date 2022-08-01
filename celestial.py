@@ -44,11 +44,12 @@ class Body:
         """
         return (self.position - b.position).length()
     
-    def gravitational_force(self, b: Body) -> Vector3:
+    def gravitational_force(self, b: Body, eps: float = 1e4) -> Vector3:
         """Return a vector representing the gravitational force exerted on this body by another.
 
         Args:
             b (Body): A celestial object.
+            eps (float): Softening parameter to prevent numerical divergences.
 
         Returns:
             Vector3: Gravitational force as a vector.
@@ -56,7 +57,7 @@ class Body:
         G = 6.6743e-11
         direction = b.position - self.position
         distance = direction.length()
-        force = G * ((self.mass * b.mass) / (distance * distance))
+        force = (G * self.mass * b.mass) / (distance * distance + eps * eps)
         
         return direction.normalized().times(force)
     
