@@ -2,7 +2,9 @@ from vector import Vector3
 from simulation import BruteForce
 from celestial import Body
 
+
 if __name__ == "__main__":
+     # The sun and inner planets of our solar system
      bodies = [Body(Vector3(), Vector3(),
                     1.98847e30, 6.957e8, "Sun", "yellow"),
                Body(Vector3(-2.565786669256473e10, 1.459776345868732e11, -1.548952074754238e7),
@@ -18,5 +20,6 @@ if __name__ == "__main__":
                     Vector3(2.476489737911525e4, -3.197373466563876e4, -4.885743869363329e3),
                     3.30104e23, 2.439e6, "Mercury", "gray")]
 
-     sim = BruteForce(bodies, 2)
+     # Run simulation
+     sim = BruteForce(bodies, 10)
      sim.run()
