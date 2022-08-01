@@ -24,14 +24,16 @@ class Body:
         self.radius = radius
         self.name = name
         self.color = color
-        self.force = Vector3()
         
-    def move(self) -> None:
-        """Move this body to a new position, according to the total force vector exerted on it, 
-        and updates the current velocity accordingly.
+    def move(self, force: Vector3) -> None:
+        """Update the velocity of this body according to the given force vector, and 
+        move it to the position.
+
+        Args:
+            force (Vector3): A force vector. 
         """
-        self.velocity = self.velocity + self.force.times(1 / self.mass)
-        self.position = self.position + self.velocity
+        self.velocity += force.times(1 / self.mass)
+        self.position += self.velocity
     
     def distance_to(self, b: Body) -> float:
         """Return the distance from this body to the specified body.
@@ -60,16 +62,3 @@ class Body:
         force = (G * self.mass * b.mass) / (distance * distance + eps * eps)
         
         return direction.normalized().times(force)
-    
-    def add_force(self, b: Body) -> None:
-        """Add the gravitational force of the specified body to the cumulative force exerted on this.
-
-        Args:
-            b (Body): A celestial object.
-        """
-        self.force += self.gravitational_force(b)
-    
-    def reset_force(self) -> None:
-        """Set the cumulative force exerted on this body to zero.
-        """
-        self.force = Vector3()

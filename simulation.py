@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from celestial import Body
+from vector import Vector3
 
 
 class Simulation:
@@ -17,7 +18,7 @@ class Simulation:
         self.bodies = bodies
         self.size = size
         self.duration = duration
-        self.timestep = 0
+        self.time = 0
 
         # Create canvas
         plt.style.use("dark_background")
@@ -57,10 +58,10 @@ class Simulation:
         Args:
             show_every (int, optional): Show the movement of planets only every specified timestep. Defaults to 3600.
         """
-        while self.timestep < self.duration:       
-            self.timestep +=1
+        while self.time < self.duration:       
+            self.time +=1
             self.update()
-            if self.timestep % show_every == 0:          
+            if self.time % show_every == 0:          
                 self.show()
             
     def remove_ticks(self) -> None:
@@ -97,11 +98,12 @@ class BruteForce(Simulation):
     def update(self) -> None:
         """Calculate the forces exerted on each body and move them accordingly.
         """
-        for first in self.bodies:
+        forces = []
+        for i, first in enumerate(self.bodies):
+            forces.append(Vector3())
             for second in self.bodies:
                 if first != second:
-                    first.add_force(second)      
+                    forces[i] += first.gravitational_force(second)      
         
-        for b in self.bodies:        
-            b.move()
-            b.reset_force()   
+        for i, b in enumerate(self.bodies):        
+            b.move(forces[i])  
