@@ -1,3 +1,11 @@
 # N-body simulation
 
-Simulating the dynamics of a celestial system
+![Inner planets](orbits.gif)
+
+## How to
+
+Install dependencies:
+* Python v3.10.4
+* Matplotlib v3.5.2
+
+Run `main.py`
