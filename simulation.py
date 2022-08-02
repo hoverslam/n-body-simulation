@@ -7,15 +7,17 @@ class Simulation:
     """This is the parent class for the different simulations. The specifc calculation is implemented in the subclass.
     """
     
-    def __init__(self, bodies: list[Body], size: int) -> None:
+    def __init__(self, bodies: list[Body], size: int, show_names: bool) -> None:
         """Initialize class.
 
         Args:
             bodies (list[Body]): A list of celestial objects.
             size (int): Size of the canvas in each directions in astronomical units (AU).
+            show_names (bool): Display name of body next to it.
         """
         self.bodies = bodies
         self.size = size
+        self.show_names = show_names
 
         # Create canvas
         plt.style.use("dark_background")
@@ -48,6 +50,8 @@ class Simulation:
         for b in self.bodies:
             marker_size = b.radius / 6.957e8 * 1e2 / self.size    # make the marker a seeable size
             self.ax.scatter(b.position[0], b.position[1], b.position[2], s=marker_size, c=b.color)
+            if self.show_names and b.name != "":
+                self.ax.text(b.position[0], b.position[1], b.position[2], b.name, color=b.color, fontsize=4)
         plt.pause(0.0001)
         self.ax.clear()
             
@@ -79,14 +83,15 @@ class BruteForce(Simulation):
     It is simple and accurate but has a complexity of O(n^2). 
     """
     
-    def __init__(self, bodies: list[Body], size: int) -> None:
+    def __init__(self, bodies: list[Body], size: int, show_names: bool = False) -> None:
         """Initialize class.
 
         Args:
             bodies (list[Body]): A list of celestial objects.
             size (int): Size of the canvas in each directions in astronomical units (AU).
+            show_names (bool): Display name of body next to it. Defaults to False.
         """
-        super().__init__(bodies, size)
+        super().__init__(bodies, size, show_names)
         
     def update(self) -> None:
         """Calculate the forces exerted on each body and move them accordingly.
