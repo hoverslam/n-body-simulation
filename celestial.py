@@ -25,15 +25,17 @@ class Body:
         self.name = name
         self.color = color
         
-    def move(self, force: Vector3) -> None:
+    def move(self, force: Vector3, dt: int) -> None:
         """Update the velocity of this body according to the given force vector, and 
         move it to the position.
 
         Args:
             force (Vector3): A force vector. 
+            dt (int): Timestep size for the leap-frog scheme.
         """
-        self.velocity += force.times(1 / self.mass)
-        self.position += self.velocity
+        acceleration = force.times(1 / self.mass)
+        self.velocity += acceleration.times(dt)
+        self.position += self.velocity.times(dt)
     
     def distance_to(self, b: Body) -> float:
         """Return the distance from this body to the specified body.
