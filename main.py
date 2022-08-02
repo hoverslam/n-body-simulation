@@ -21,5 +21,5 @@ if __name__ == "__main__":
                     3.30104e23, 2.439e6, "Mercury", "gray")]
 
      # Run simulation
-     sim = BruteForce(bodies, 10)
+     sim = BruteForce(bodies, 2)
      sim.run()
