@@ -7,22 +7,21 @@ class Simulation:
     """This is the parent class for the different simulations. The specifc calculation is implemented in the subclass.
     """
     
-    def __init__(self, bodies: list[Body], size: int, duration: float) -> None:
+    def __init__(self, bodies: list[Body], size: int) -> None:
         """Initialize class.
 
         Args:
             bodies (list[Body]): A list of celestial objects.
             size (int): Size of the canvas in each directions in astronomical units (AU).
-            duration (float): Duration of the simulation.
         """
         self.bodies = bodies
         self.size = size
-        self.duration = duration
-        self.time = 0
 
         # Create canvas
         plt.style.use("dark_background")
         self.fig = plt.figure(dpi=200)
+        self.fig.canvas.set_window_title("N-body simulation")
+        self.fig.canvas.mpl_connect("close_event", exit)
         self.ax = self.fig.add_subplot(projection="3d")
         
         # Remove panes and lines
@@ -52,17 +51,12 @@ class Simulation:
         plt.pause(0.0001)
         self.ax.clear()
             
-    def run(self, show_every: int = 3600) -> None:
+    def run(self) -> None:
         """Run the simulation.
-
-        Args:
-            show_every (int, optional): Show the movement of planets only every specified timestep. Defaults to 3600.
         """
-        while self.time < self.duration:       
-            self.time +=1
+        while True:
             self.update()
-            if self.time % show_every == 0:          
-                self.show()
+            self.show()
             
     def remove_ticks(self) -> None:
         """Remove ticks on all axis to get an empty "universe".
@@ -78,22 +72,21 @@ class Simulation:
         self.ax.set_xlim((-limit, limit))
         self.ax.set_ylim((-limit, limit))
         self.ax.set_zlim((-limit, limit))
-        
+                
         
 class BruteForce(Simulation):
     """This class implements the direct brute-force method. The force acting on a single body is calculated by looping over all other bodies. 
     It is simple and accurate but has a complexity of O(n^2). 
     """
     
-    def __init__(self, bodies: list[Body], size: int, duration: float = 31.536e6) -> None:
+    def __init__(self, bodies: list[Body], size: int) -> None:
         """Initialize class.
 
         Args:
             bodies (list[Body]): A list of celestial objects.
             size (int): Size of the canvas in each directions in astronomical units (AU).
-            duration (float): Duration of the simulation. Defaults to 31.536e6, i.e. one "year".
         """
-        super().__init__(bodies, size, duration)
+        super().__init__(bodies, size)
         
     def update(self) -> None:
         """Calculate the forces exerted on each body and move them accordingly.
@@ -106,4 +99,4 @@ class BruteForce(Simulation):
                     forces[i] += first.gravitational_force(second)      
         
         for i, b in enumerate(self.bodies):        
-            b.move(forces[i])  
+            b.move(forces[i], 25000)    # 25000 is a good trade off between accuracy and speed  
