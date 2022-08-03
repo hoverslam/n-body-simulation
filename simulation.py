@@ -136,4 +136,4 @@ class BruteForce(Simulation):
                     forces[i] += first.gravitational_force(second)   
   
         for i, b in enumerate(self.bodies):        
-            b.move(forces[i], 5000)    # 20000 is a good tradeoff between accuracy and speed
+            b.move(forces[i], 20000)    # 20000 is a good tradeoff between accuracy and speed
