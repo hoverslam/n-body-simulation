@@ -1,6 +1,6 @@
 # N-body simulation
 
-![Inner planets](inner_planets.gif)
+![Inner planets](assets/inner_planets.gif)
 
 ## How to
 

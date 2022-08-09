@@ -1,4 +1,9 @@
+# Libraries
 import numpy as np
+
+# Custom modules
+import sys
+sys.path.append("modules")
 from vector import Vector3
 from simulation import BruteForce
 from celestial import Body
