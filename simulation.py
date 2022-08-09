@@ -55,11 +55,14 @@ class Simulation:
         plt.pause(0.0001)
         self.ax.clear()
             
-    def run(self) -> None:
+    def run(self, dt: int = 10000) -> None:
         """Run the simulation.
+        
+        Args:
+            dt (int): Step size for the leap-frog scheme. Defaults to 20000.
         """
         while True:
-            self.update()
+            self.update(dt)
             self.show()
             
     def remove_ticks(self) -> None:
@@ -120,8 +123,11 @@ class BruteForce(Simulation):
         """
         super().__init__(bodies, size, show_names)
         
-    def update(self) -> None:
+    def update(self, dt: int) -> None:
         """Calculate the forces exerted on each body and move them accordingly.
+        
+        Args:
+            dt (int): Step size for the leap-frog scheme.
         """
         forces = []
         for i, first in enumerate(self.bodies):
@@ -136,4 +142,4 @@ class BruteForce(Simulation):
                     forces[i] += first.gravitational_force(second)   
   
         for i, b in enumerate(self.bodies):        
-            b.move(forces[i], 20000)    # 20000 is a good tradeoff between accuracy and speed
+            b.move(forces[i], dt)
