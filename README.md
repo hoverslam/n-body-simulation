@@ -30,3 +30,7 @@ Install dependencies:
 * Numpy v1.23.1
 
 Run `main.py`
+
+## Note
+
+The simulation will merge colliding bodies but the leap-frog step *dt* must be reduces (to ~1000) for it to work. This will slow down the simulation significantly. 
